@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements/Toksave - Western Highlands Provincial Government</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #fff url('https://via.placeholder.com/300x300?text=Bald+Eagle') no-repeat center center fixed;
+            background-size: 300px;
+            color: #000;
+            overflow-x: hidden;
+            transition: filter 0.3s;
+        }
+        body:hover {
+            filter: drop-shadow(0 0 30px rgba(15, 107, 43, 0.9));
+            animation: eagleGlow 1.5s infinite alternate;
+        }
+        @keyframes eagleGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(15, 107, 43, 0.7)) drop-shadow(0 0 10px rgba(139, 69, 19, 0.5)); }
+            100% { filter: drop-shadow(0 0 40px rgba(15, 107, 43, 1)) drop-shadow(0 0 20px rgba(139, 69, 19, 0.8)); }
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #0f6b2b;
+            text-shadow: 0 0 5px rgba(15, 107, 43, 0.5);
+            transition: text-shadow 0.3s;
+            text-align: center;
+            margin: 25px 0;
+        }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+        h3, h4 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+        h1:hover, h2:hover, h3:hover, h4:hover {
+            text-shadow: 0 0 15px #0f6b2b, 0 0 25px #8b4513, 0 0 35px rgba(15, 107, 43, 0.8);
+            animation: glowPulse 1s infinite alternate;
+        }
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 10px #0f6b2b, 0 0 20px #8b4513; }
+            100% { text-shadow: 0 0 20px #0f6b2b, 0 0 30px #8b4513; }
+        }
+        p {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            line-height: 1.6;
+            text-align: center;
+        }
+        nav {
+            background: linear-gradient(90deg, #0f6b2b, #000);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 50px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        nav li {
+            position: relative;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            transition: transform 0.3s, text-shadow 0.3s, filter 0.3s;
+            transform-style: preserve-3d;
+        }
+        nav a:hover {
+            transform: translateZ(30px) translateY(-5px);
+            text-shadow: 0 0 10px #0f6b2b;
+            filter: brightness(1.3);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #000;
+            min-width: 200px;
+            box-shadow: 0 0 10px rgba(15, 107, 43, 0.5);
+            z-index: 1;
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px;
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.3s, text-shadow 0.3s, filter 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: rgba(15, 107, 43, 0.2);
+            text-shadow: 0 0 10px #0f6b2b;
+            filter: brightness(1.3);
+        }
+        .language-toggle {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            display: flex;
+            gap: 15px;
+        }
+        .language-toggle a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: text-shadow 0.3s, filter 0.3s;
+        }
+        .language-toggle a.active {
+            font-weight: bold;
+            text-shadow: 0 0 10px #0f6b2b;
+        }
+        .language-toggle a:hover {
+            text-shadow: 0 0 10px #0f6b2b;
+            filter: brightness(1.3);
+        }
+        section {
+            padding: 50px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+        }
+        .page-content, .announcements-grid, .photo-upload-grid {
+            background: #000;
+            color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            transform-style: preserve-3d;
+            border: 1px solid #0f6b2b;
+            box-shadow: 0 0 10px rgba(15, 107, 43, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+        }
+        .page-content:hover, .announcements-grid:hover, .photo-upload-grid:hover {
+            transform: translateZ(30px);
+            box-shadow: 0 0 30px #0f6b2b, 0 0 50px #8b4513;
+            filter: brightness(1.3);
+        }
+        .announcements-grid, .photo-upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .announcement-card {
+            background: #000;
+            color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            transform-style: preserve-3d;
+            border: 1px solid #0f6b2b;
+            box-shadow: 0 0 10px rgba(15, 107, 43, 0.3);
+        }
+        .announcement-card:hover {
+            transform: perspective(1200px) rotateY(15deg) translateZ(40px);
+            box-shadow: 0 0 30px #0f6b2b, 0 0 50px #8b4513, 0 0 70px rgba(15, 107, 43, 0.8);
+            filter: brightness(1.3);
+        }
+        .photo-upload-grid img {
+            width: 100%;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            transform-style: preserve-3d;
+            border: 1px solid #0f6b2b;
+        }
+        .photo-upload-grid img:hover {
+            transform: perspective(1200px) scale(1.15) rotateY(10deg) translateZ(40px);
+            box-shadow: 0 0 30px #0f6b2b, 0 0 50px #8b4513, 0 0 70px rgba(15, 107, 43, 0.8);
+            filter: brightness(1.3);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #0f6b2b, #8b4513);
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            transform-style: preserve-3d;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+        .cta-button:hover {
+            transform: translateZ(30px) scale(1.15);
+            box-shadow: 0 0 30px #0f6b2b, 0 0 50px #8b4513;
+            filter: brightness(1.3);
+        }
+        footer {
+            background: linear-gradient(90deg, #0f6b2b, #000);
+            padding: 25px;
+            text-align: center;
+            border-top: 2px solid #8b4513;
+            margin-top: 50px;
+        }
+        footer a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: transform 0.3s, text-shadow 0.3s, filter 0.3s;
+        }
+        footer a:hover {
+            transform: translateZ(30px) translateY(-5px);
+            text-shadow: 0 0 10px #0f6b2b;
+            filter: brightness(1.3);
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+            h2 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+            p { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
+            nav ul { flex-direction: column; gap: 15px; }
+            .dropdown-content { position: static; background: none; box-shadow: none; }
+            .announcements-grid, .photo-upload-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 30px 15px; }
+        }
+        @media (orientation: portrait) {
+            nav ul { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle">
+        <a href="#" class="lang-link" data-lang="en">English</a>
+        <a href="#" class="lang-link" data-lang="tpi">Tok Pisin</a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whppa.html">WHPPA</a></li>
+            <li><a href="development.html">Development Plans</a></li>
+            <li class="dropdown">
+                <a href="districts.html">Districts</a>
+                <div class="dropdown-content">
+                    <a href="mt-hagen.html">Mt. Hagen</a>
+                    <a href="mul-baiyer.html">Mul-Baiyer</a>
+                    <a href="dei.html">Dei</a>
+                    <a href="tambul-nebilyer.html">Tambul-Nebilyer</a>
+                </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="tourism.html">Tourism</a></li>
+            <li><a href="sectors.html">Sectors</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="stories-contracts.html">Development Stories & Contracts</a></li>
+            <li><a href="voice-of-the-eagle.html">Voice of the Eagle</a></li>
+            <li><a href="announcements.html">Announcements/Toksave</a></li>
+            <li><a href="budget.html">Annual Budget</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <section id="announcements" class="page-content">
+        <h1 data-lang-key="announcements-title">Announcements/Toksave</h1>
+        <p data-lang-key="announcements-desc">Latest announcements and updates from the provincial government.</p>
+        <h2 data-lang-key="announcements-heading">Recent Announcements</h2>
+        <div class="announcements-grid">
+            
+            <div class="announcement-card">
+                <h3 data-lang-key="budget-title">Budget Release</h3>
+                <p data-lang-key="budget-desc">Details of the 2025 budget announcement.</p>
+            </div>
+            <div class="announcement-card">
+                <h3 data-lang-key="project-title">New Project Launch</h3>
+                <p data-lang-key="project-desc">Upcoming infrastructure projects.</p>
+            </div>
+            <div class="announcement-card">
+                <h3 data-lang-key="event-title">Community Event</h3>
+                <p data-lang-key="event-desc">Join our next community forum.</p>
+            </div>
+        
+        </div>
+        <h2 data-lang-key="gallery-heading">Photo Gallery</h2>
+        <p data-lang-key="gallery-desc">Add unlimited photos below via backend integration (e.g., CMS, Firebase).</p>
+        <div class="photo-upload-grid">
+            <img src="https://via.placeholder.com/300?text=Announcements/Toksave+Photo+1" alt="Announcements/Toksave Photo 1">
+            <img src="https://via.placeholder.com/300?text=Announcements/Toksave+Photo+2" alt="Announcements/Toksave Photo 2">
+        </div>
+        <a href="contact.html" class="cta-button" data-lang-key="contact-button">Contact Us</a>
+    </section>
+    <footer>
+        <p>© 2025 Western Highlands Provincial Government</p>
+        <div>
+            <a href="contact.html">Contact Us</a>
+            <a href="whppa.html#org-chart">Organizational Chart</a>
+            <a href="projects.html#jobs">Jobs / Tenders</a>
+            <a href="budget.html">Annual Budgets</a>
+            <a href="whppa.html#laws">Provincial Laws</a>
+            <a href="https://www.png.gov.pg">National Agencies</a>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        const translations = {
+            en: {
+                'announcements-title': 'Announcements/Toksave',
+                'announcements-desc': 'Latest announcements and updates from the provincial government.',
+                'announcements-heading': 'Recent Announcements',
+                
+                'budget-title': 'Budget Release',
+                'budget-desc': 'Details of the 2025 budget announcement.',
+                'project-title': 'New Project Launch',
+                'project-desc': 'Upcoming infrastructure projects.',
+                'event-title': 'Community Event',
+                'event-desc': 'Join our next community forum.'
+        
+                'gallery-heading': 'Photo Gallery',
+                'gallery-desc': 'Add unlimited photos below via backend integration (e.g., CMS, Firebase).',
+                'contact-button': 'Contact Us'
+            },
+            tpi: {
+                'announcements-title': 'Ol Toksave',
+                'announcements-desc': 'Ol niupela toksave na apdet bilong provinsal gavman.',
+                'announcements-heading': 'Ol Niupela Toksave',
+                
+                'budget-title': 'Bajet Rilis',
+                'budget-desc': 'Detel bilong 2025 bajet toksave.',
+                'project-title': 'Niupela Projek Los',
+                'project-desc': 'Ol infrastaksa projek i kamap.',
+                'event-title': 'Komuniti Ivent',
+                'event-desc': 'Joinim nekst komuniti forum.'
+        
+                'gallery-heading': 'Galeri Bilong Foto',
+                'gallery-desc': 'Putim planti foto long dispela hap (e.g., CMS, Firebase).',
+                'contact-button': 'Kontak Mipela'
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem('language', lang);
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                element.textContent = translations[lang][key] || element.textContent;
+            });
+            document.querySelectorAll('.lang-link').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('data-lang') === lang);
+            });
+        }
+
+        document.querySelectorAll('.lang-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage(link.getAttribute('data-lang'));
+            });
+        });
+
+        const savedLang = localStorage.getItem('language') || 'en';
+        setLanguage(savedLang);
+
+        gsap.from("h1, h2, h3, h4", {
+            scrollTrigger: { trigger: "h1, h2, h3, h4", start: "top 80%" },
+            opacity: 0, y: 100, scale: 0.8, rotateX: 15, duration: 1.5, ease: "power3.out", stagger: 0.2
+        });
+        gsap.from(".page-content, .announcement-card, .photo-upload-grid img", {
+            scrollTrigger: { trigger: ".page-content, .announcements-grid, .photo-upload-grid", start: "top 80%" },
+            opacity: 0, y: 50, scale: 0.8, rotateY: 20, duration: 1.2, ease: "power3.out", stagger: 0.3,
+            onComplete: function() { gsap.set(this.targets(), { filter: "brightness(1.2)" }); }
+        });
+    </script>
+</body>
+</html>
